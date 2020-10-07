@@ -1,3 +1,5 @@
-node_modules/
-azure-activedirectory-library-for-objc/
+/.idea
+/node_modules
+/azure-activedirectory-library-for-objc
+/tmp
 debug.txt

@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
+var shell = require('shelljs');
+var plugman = require('plugman');
+var path = require('path');
+var fs = require('fs');
+
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
 module.exports = function (ctx) {
-    var shell = ctx.requireCordovaModule('shelljs');
-    var path = ctx.requireCordovaModule('path');
-    var fs = ctx.requireCordovaModule('fs');
+
     var helperPluginId = 'cordova-plugin-ms-adal-sso';
 
     // Removing references from .projitems
@@ -29,8 +32,6 @@ module.exports = function (ctx) {
             platform: 'windows',
             project: path.join(ctx.opts.projectRoot, 'platforms', 'windows')
         };
-
-        var plugman = ctx.requireCordovaModule('../plugman/plugman');
 
         plugman.uninstall(plugmanInstallOpts.platform, plugmanInstallOpts.project, 
             helperPluginId, plugmanInstallOpts.plugins_dir);

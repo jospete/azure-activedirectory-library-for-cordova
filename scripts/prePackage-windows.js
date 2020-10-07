@@ -2,10 +2,13 @@
 
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
+var shell = require('shelljs');
+var plugman = require('plugman');
+var path = require('path');
+var fs = require('fs');
+
+
 module.exports = function (ctx) {
-    var shell = ctx.requireCordovaModule('shelljs');
-    var path = ctx.requireCordovaModule('path');
-    var fs = ctx.requireCordovaModule('fs');
     var helperPluginId = 'cordova-plugin-ms-adal-sso';
 
     // Read config.xml -> extract adal-use-corporate-network variable value; default it to false
@@ -43,8 +46,6 @@ module.exports = function (ctx) {
             console.log('Adding SSO helper plugin');
 
             // Enabling dependency
-            var plugman = ctx.requireCordovaModule('../plugman/plugman');
-
             plugman.install(plugmanInstallOpts.platform, plugmanInstallOpts.project, 
                 ssoPluginPath, plugmanInstallOpts.plugins_dir);
         }
@@ -57,7 +58,6 @@ module.exports = function (ctx) {
             console.log('Removing SSO helper plugin');
 
             // Removing dependency
-            var plugman = ctx.requireCordovaModule('../plugman/plugman');
 
             plugman.uninstall(plugmanInstallOpts.platform, plugmanInstallOpts.project, 
                 helperPluginId, plugmanInstallOpts.plugins_dir);

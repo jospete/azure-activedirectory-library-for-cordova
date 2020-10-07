@@ -36,6 +36,10 @@
     "gulp-git": "^1.11.0",
     "gulp-run-sequence": "^0.3.2",
     "gulp-shell": "^0.5.2",
-    "run-sequence": "^1.2.2"
+    "plugman": "^3.0.1",
+    "q": "^1.5.1",
+    "run-sequence": "^1.2.2",
+    "shelljs": "^0.8.4",
+    "xcode": "^3.0.1"
   }
 }

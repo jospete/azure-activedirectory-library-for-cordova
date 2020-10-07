@@ -2,6 +2,13 @@
 
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 
+
+var fs = require('fs');
+var path = require('path');
+var xcode = require('xcode');
+var q = require('q');
+var standardIosProjectFile = require('plugman/platforms/ios');
+
 var CODE_SIGN_ENTITLEMENTS = 'CODE_SIGN_ENTITLEMENTS';
 
 var ACTION_INSTALL = 1;
@@ -22,11 +29,7 @@ module.exports = function (ctx) {
         return;
     };
 
-    var fs = ctx.requireCordovaModule('fs');
-    var path = ctx.requireCordovaModule('path');
-    var xcode = ctx.requireCordovaModule('xcode');
-
-    var deferral = new ctx.requireCordovaModule('q').defer();
+    var deferral = new q.defer();
 
     var platformRoot = path.join(ctx.opts.projectRoot, 'platforms', 'ios');
 
@@ -38,7 +41,7 @@ module.exports = function (ctx) {
         iosProjectFile = require(path.join(ctx.opts.projectRoot, 'platforms/ios/cordova/lib/projectFile'));
     } catch (ex) {
         // fallback to cordova-lib (shared platform functionality)
-        iosProjectFile = ctx.requireCordovaModule('../plugman/platforms/ios');
+        iosProjectFile = standardIosProjectFile;
     }
 
     fs.readdir(platformRoot, function (err, data) {
